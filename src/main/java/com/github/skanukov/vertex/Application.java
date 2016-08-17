@@ -1,5 +1,6 @@
 package com.github.skanukov.vertex;
 
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 
 public final class Application {
@@ -27,6 +28,10 @@ public final class Application {
      */
     public void init() {
         Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(ApplicationVerticle.class.getName());
+
+        // Set number of verticle instances to CPU count.
+        int cpuCount = Runtime.getRuntime().availableProcessors();
+        DeploymentOptions options = new DeploymentOptions().setInstances(cpuCount);
+        vertx.deployVerticle(ApplicationVerticle.class.getName(), options);
     }
 }
