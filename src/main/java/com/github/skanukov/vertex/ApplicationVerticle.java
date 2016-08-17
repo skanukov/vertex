@@ -1,5 +1,6 @@
 package com.github.skanukov.vertex;
 
+import com.github.skanukov.vertex.config.ApplicationDispatcher;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.logging.Logger;
@@ -21,8 +22,7 @@ public final class ApplicationVerticle extends AbstractVerticle {
 
         HttpServer server = vertx.createHttpServer();
         Router router = Router.router(vertx);
-        router.route("/").handler(rc ->
-                rc.response().putHeader("content-type", "text/html").end("Hello, world!"));
+        new ApplicationDispatcher().dispatch(router);
         server.requestHandler(router::accept).listen(8080);
     }
 }
