@@ -1,5 +1,6 @@
 package com.github.skanukov.vertex.apps.web.config;
 
+import com.github.skanukov.vertex.apps.web.controllers.home.Index;
 import com.github.skanukov.vertex.core.route.VertexRouter;
 import io.vertx.ext.web.Router;
 
@@ -31,6 +32,6 @@ public final class WebRouter extends VertexRouter {
      */
     @Override
     public void route() {
-        get("/", context -> context.response().putHeader("content-type", "text/html").end("Hello, world!"));
+        get("/", new Index());
     }
 }
