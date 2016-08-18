@@ -13,6 +13,6 @@ public class Index extends HomeAction implements HttpAction {
     @Override
     public void call(RoutingContext context) {
         JsonArray jsonArray = new JsonArray(Arrays.asList(1, 2, 3));
-        context.response().putHeader("content-type", "application/json").end(jsonArray.encode());
+        renderJson(context, jsonArray);
     }
 }
