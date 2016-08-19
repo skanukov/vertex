@@ -1,15 +1,18 @@
 package com.github.skanukov.vertex.apps.web.controllers.home;
 
 import com.github.skanukov.vertex.core.controller.HttpAction;
+import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.RoutingContext;
+
+import java.util.Arrays;
 
 /**
  * Home controller Index action.
  */
-public class Index extends HomeAction implements HttpAction {
+public class Json extends HomeAction implements HttpAction {
     @Override
     public void call(RoutingContext context) {
-        context.put("name", "User");
-        renderTemplate(context, "./templates/web/home/index.ftl");
+        JsonArray jsonArray = new JsonArray(Arrays.asList(1, 2, 3));
+        renderJson(context, jsonArray);
     }
 }

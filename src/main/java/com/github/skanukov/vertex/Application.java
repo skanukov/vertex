@@ -3,6 +3,9 @@ package com.github.skanukov.vertex;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 
+/**
+ * Singleton class for application managing.
+ */
 public final class Application {
     //<editor-fold desc="Singleton region">
     private Application() {

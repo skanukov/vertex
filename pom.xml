@@ -63,6 +63,13 @@
             <version>${vertx.version}</version>
         </dependency>
 
+        <!-- Template engine -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web-templ-freemarker</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
         <!-- Logger -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
