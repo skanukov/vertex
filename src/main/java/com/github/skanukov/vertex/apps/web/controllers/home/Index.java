@@ -1,12 +1,12 @@
 package com.github.skanukov.vertex.apps.web.controllers.home;
 
-import com.github.skanukov.vertex.core.controller.HttpAction;
+import com.github.skanukov.vertex.core.controller.HtmlAction;
 import io.vertx.ext.web.RoutingContext;
 
 /**
  * Home controller Index action.
  */
-public class Index extends HomeAction implements HttpAction {
+public class Index extends HomeAction implements HtmlAction {
     @Override
     public void call(RoutingContext context) {
         context.put("name", "User");

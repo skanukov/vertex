@@ -3,7 +3,7 @@ package com.github.skanukov.vertex.core.controller;
 import io.vertx.ext.web.RoutingContext;
 
 /**
- * Defines interface for applications actions rendering templates.
+ * Defines interface for applications actions.
  */
 @FunctionalInterface
 public interface HttpAction {
