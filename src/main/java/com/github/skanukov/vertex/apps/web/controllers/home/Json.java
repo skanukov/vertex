@@ -7,7 +7,7 @@ import io.vertx.ext.web.RoutingContext;
 import java.util.Arrays;
 
 /**
- * Home action Index action.
+ * Home controller Index action.
  */
 public class Json extends HomeAction implements JsonAction {
     @Override

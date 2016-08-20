@@ -4,7 +4,7 @@ import com.github.skanukov.vertex.core.action.HtmlAction;
 import io.vertx.ext.web.RoutingContext;
 
 /**
- * Home action Index action.
+ * Home controller Index action.
  */
 public class Index extends HomeAction implements HtmlAction {
     @Override
