@@ -1,10 +1,10 @@
 package com.github.skanukov.vertex.apps.web.controllers.home;
 
-import com.github.skanukov.vertex.core.controller.HtmlAction;
+import com.github.skanukov.vertex.core.action.HtmlAction;
 import io.vertx.ext.web.RoutingContext;
 
 /**
- * Home controller Index action.
+ * Home action Index action.
  */
 public class Index extends HomeAction implements HtmlAction {
     @Override

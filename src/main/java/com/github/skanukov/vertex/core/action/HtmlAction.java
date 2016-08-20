@@ -1,4 +1,4 @@
-package com.github.skanukov.vertex.core.controller;
+package com.github.skanukov.vertex.core.action;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.templ.FreeMarkerTemplateEngine;

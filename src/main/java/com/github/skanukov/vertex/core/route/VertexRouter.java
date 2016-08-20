@@ -1,6 +1,6 @@
 package com.github.skanukov.vertex.core.route;
 
-import com.github.skanukov.vertex.core.controller.HttpAction;
+import com.github.skanukov.vertex.core.action.HttpAction;
 import io.vertx.ext.web.Router;
 
 /**

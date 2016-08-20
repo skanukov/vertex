@@ -1,4 +1,4 @@
-package com.github.skanukov.vertex.core.controller;
+package com.github.skanukov.vertex.core.action;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
