@@ -1,8 +1,7 @@
 package com.github.skanukov.vertex.core.action;
 
+import com.github.skanukov.vertex.core.template.TemplateEngineFactory;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.templ.FreeMarkerTemplateEngine;
-import io.vertx.ext.web.templ.TemplateEngine;
 
 /**
  * Defines interface for applications actions rendering HTML templates.
@@ -16,8 +15,7 @@ public interface HtmlAction extends HttpAction {
      * @param templatePath The path to template file.
      */
     default void renderTemplate(RoutingContext context, String templatePath) {
-        final TemplateEngine templateEngine = FreeMarkerTemplateEngine.create();
-        templateEngine.render(context, templatePath, res -> {
+        TemplateEngineFactory.getTemplateEngine().render(context, templatePath, res -> {
             if (res.failed()) {
                 context.fail(res.cause());
             } else {

@@ -6,25 +6,8 @@ import io.vertx.core.Vertx;
 /**
  * Singleton class for application managing.
  */
-public final class Application {
-    //<editor-fold desc="Singleton region">
-    private Application() {
-    }
-
-    // Lazy singleton initialization
-    private static class SingletonHolder {
-        private static final Application INSTANCE = new Application();
-    }
-
-    /**
-     * Returns the Application singleton instance.
-     *
-     * @return The Application singleton instance.
-     */
-    public static Application getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
-    //</editor-fold>
+public enum Application {
+    INSTANCE;
 
     /**
      * Entry point for the Vertex application.
