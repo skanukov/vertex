@@ -14,6 +14,11 @@ hs_err_pid*
 # Compiled files
 target/
 
+# Include only settings and migration files for Flyway
+db/migrate/*
+!db/migrate/conf/
+!db/migrate/sql/
+
 # Idea settings
 .idea/
 *.iml
