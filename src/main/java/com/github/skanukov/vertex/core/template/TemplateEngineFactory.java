@@ -1,5 +1,6 @@
 package com.github.skanukov.vertex.core.template;
 
+import com.github.skanukov.vertex.core.config.SettingsFactory;
 import io.vertx.ext.web.templ.FreeMarkerTemplateEngine;
 import io.vertx.ext.web.templ.TemplateEngine;
 
@@ -12,7 +13,7 @@ public final class TemplateEngineFactory {
 
     // Lazy initialization
     private static class TemplateEngineHolder {
-        private static final TemplateEngine INSTANCE = FreeMarkerTemplateEngine.create();
+        private static final TemplateEngine INSTANCE = createTemplateEngine();
     }
 
     /**
@@ -22,5 +23,13 @@ public final class TemplateEngineFactory {
      */
     public static TemplateEngine getTemplateEngine() {
         return TemplateEngineHolder.INSTANCE;
+    }
+
+    private static TemplateEngine createTemplateEngine() {
+        FreeMarkerTemplateEngine templateEngine = FreeMarkerTemplateEngine.create();
+        if (SettingsFactory.getSettings().getBoolean("is_debug", false)) {
+            templateEngine.setMaxCacheSize(0);
+        }
+        return templateEngine;
     }
 }
