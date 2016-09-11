@@ -2,6 +2,7 @@ package com.github.skanukov.vertex.apps.web.config;
 
 import com.github.skanukov.vertex.apps.web.controllers.home.Index;
 import com.github.skanukov.vertex.apps.web.controllers.home.Json;
+import com.github.skanukov.vertex.apps.web.controllers.users.IndexAction;
 import com.github.skanukov.vertex.core.route.VertexRouter;
 import io.vertx.ext.web.Router;
 
@@ -35,5 +36,6 @@ public final class WebRouter extends VertexRouter {
     public void route() {
         get("/", new Index());
         get("/json", new Json());
+//        get("/users", new IndexAction());
     }
 }

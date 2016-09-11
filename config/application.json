@@ -4,7 +4,7 @@
     "host": "localhost",
     "port": 5432,
     "database": "demo_dev",
-    "user": "demo_dev",
+    "username": "demo_dev",
     "password": "123"
   }
 }
