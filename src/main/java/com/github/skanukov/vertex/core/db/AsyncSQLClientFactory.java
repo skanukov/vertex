@@ -2,6 +2,7 @@ package com.github.skanukov.vertex.core.db;
 
 import com.github.skanukov.vertex.Application;
 import com.github.skanukov.vertex.core.config.SettingsFactory;
+import com.github.skanukov.vertex.core.vertx.VertxFactory;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.asyncsql.PostgreSQLClient;
@@ -29,6 +30,6 @@ public final class AsyncSQLClientFactory {
 
     private static AsyncSQLClient createAsyncSQLClient() {
         JsonObject dbSettings = SettingsFactory.getSettings().getJsonObject("db");
-        return PostgreSQLClient.createShared(Application.INSTANCE.getVertx(), dbSettings);
+        return PostgreSQLClient.createShared(VertxFactory.getVertx(), dbSettings);
     }
 }

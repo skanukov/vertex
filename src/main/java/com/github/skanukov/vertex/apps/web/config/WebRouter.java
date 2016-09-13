@@ -36,6 +36,6 @@ public final class WebRouter extends VertexRouter {
     public void route() {
         get("/", new Index());
         get("/json", new Json());
-//        get("/users", new IndexAction());
+        get("/users", new IndexAction());
     }
 }
