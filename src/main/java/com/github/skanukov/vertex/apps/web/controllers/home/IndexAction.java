@@ -4,9 +4,9 @@ import com.github.skanukov.vertex.core.action.HtmlAction;
 import io.vertx.ext.web.RoutingContext;
 
 /**
- * Home controller Index action.
+ * Home controller IndexAction action.
  */
-public class Index extends HomeAction implements HtmlAction {
+public class IndexAction extends HomeAction implements HtmlAction {
     @Override
     public void call(RoutingContext context) {
         context.put("name", "User");
