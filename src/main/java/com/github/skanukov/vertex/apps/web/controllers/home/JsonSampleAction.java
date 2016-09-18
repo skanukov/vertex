@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Home controller Index action.
+ * Home controller IndexAction action.
  */
-public class Json extends HomeAction implements JsonAction {
+public class JsonSampleAction extends HomeAction implements JsonAction {
     @Override
     public void call(RoutingContext context) {
         List<Integer> intArray = Arrays.asList(1, 2, 3);
