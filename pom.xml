@@ -10,7 +10,7 @@
 
     <properties>
         <!-- Define Vert.x version -->
-        <vertx.version>3.3.2</vertx.version>
+        <vertx.version>3.3.3</vertx.version>
         <main.class>com.github.skanukov.vertex.Main</main.class>
     </properties>
 
