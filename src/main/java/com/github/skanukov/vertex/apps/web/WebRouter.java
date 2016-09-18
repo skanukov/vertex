@@ -1,6 +1,7 @@
-package com.github.skanukov.vertex.apps.web.config;
+package com.github.skanukov.vertex.apps.web;
 
-import com.github.skanukov.vertex.apps.web.controllers.home.JsonSampleAction;
+import com.github.skanukov.vertex.apps.web.controllers.HomeController;
+import com.github.skanukov.vertex.apps.web.controllers.UserController;
 import com.github.skanukov.vertex.core.route.VertexRouter;
 import io.vertx.ext.web.Router;
 
@@ -32,8 +33,11 @@ public final class WebRouter extends VertexRouter {
      */
     @Override
     public void route() {
-        get("/", new com.github.skanukov.vertex.apps.web.controllers.home.IndexAction());
-        get("/json", new JsonSampleAction());
-        get("/users", new com.github.skanukov.vertex.apps.web.controllers.users.IndexAction());
+        HomeController homeController = new HomeController();
+        get("/", homeController::actionIndex);
+        get("/json", homeController::actionJson);
+
+        UserController userController = new UserController();
+        get("/users", userController::actionIndex);
     }
 }

@@ -1,6 +1,5 @@
 package com.github.skanukov.vertex;
 
-import com.github.skanukov.vertex.config.ApplicationDispatcher;
 import com.github.skanukov.vertex.core.config.SettingsFactory;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;

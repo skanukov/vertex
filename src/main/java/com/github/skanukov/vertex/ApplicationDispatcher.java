@@ -1,6 +1,6 @@
-package com.github.skanukov.vertex.config;
+package com.github.skanukov.vertex;
 
-import com.github.skanukov.vertex.apps.web.config.WebRouter;
+import com.github.skanukov.vertex.apps.web.WebRouter;
 import com.github.skanukov.vertex.core.route.VertexDispatcher;
 import io.vertx.ext.web.Router;
 
