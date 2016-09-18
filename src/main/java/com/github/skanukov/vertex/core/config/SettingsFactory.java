@@ -12,6 +12,8 @@ import java.nio.file.Paths;
  * Holds the application settings.
  */
 public final class SettingsFactory {
+    public static final int DEFAULT_SERVER_PORT = 8080;
+
     private static final String SETTINGS_FILE_PATH = "./config/application.json";
 
     private SettingsFactory() {

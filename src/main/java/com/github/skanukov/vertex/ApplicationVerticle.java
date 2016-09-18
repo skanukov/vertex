@@ -1,6 +1,7 @@
 package com.github.skanukov.vertex;
 
 import com.github.skanukov.vertex.config.ApplicationDispatcher;
+import com.github.skanukov.vertex.core.config.SettingsFactory;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.logging.Logger;
@@ -18,11 +19,19 @@ public final class ApplicationVerticle extends AbstractVerticle {
      */
     @Override
     public void start() {
-        logger.info("Verticle {} created", this);
+        startServer(getRouter());
+    }
 
-        HttpServer server = vertx.createHttpServer();
+    private Router getRouter() {
         Router router = Router.router(vertx);
         new ApplicationDispatcher().dispatch(router);
-        server.requestHandler(router::accept).listen(8080);
+        return router;
+    }
+
+    private void startServer(Router router) {
+        int serverPort = SettingsFactory.getSettings().getInteger("port", SettingsFactory.DEFAULT_SERVER_PORT);
+        HttpServer server = vertx.createHttpServer();
+        server.requestHandler(router::accept).listen(serverPort);
+        logger.info("Verticle server {} running at {}", this, serverPort);
     }
 }

@@ -24,10 +24,12 @@ public enum Application {
         }
 
         Vertx vertx = VertxFactory.getVertx();
+        vertx.deployVerticle(ApplicationVerticle.class.getName(), getDeploymentOptions());
+    }
 
+    private DeploymentOptions getDeploymentOptions() {
         // Set number of verticle instances to CPU count.
         int cpuCount = Runtime.getRuntime().availableProcessors();
-        DeploymentOptions options = new DeploymentOptions().setInstances(cpuCount);
-        vertx.deployVerticle(ApplicationVerticle.class.getName(), options);
+        return new DeploymentOptions().setInstances(cpuCount);
     }
 }
