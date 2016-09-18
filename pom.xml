@@ -70,6 +70,13 @@
             <version>${vertx.version}</version>
         </dependency>
 
+        <!-- Async SQL client -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-mysql-postgresql-client</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
         <!-- Logger -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
