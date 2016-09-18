@@ -1,7 +1,8 @@
 package com.github.skanukov.vertex.core.route;
 
-import com.github.skanukov.vertex.core.action.HttpAction;
+import io.vertx.core.Handler;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 
 /**
  * Base class for all application routers.
@@ -42,7 +43,7 @@ public abstract class VertexRouter {
      * @param path   The path to handle.
      * @param action The action to use for handling.
      */
-    protected void get(String path, HttpAction action) {
-        router.get(basePath + path).handler(action::call);
+    protected void get(String path, Handler<RoutingContext> action) {
+        router.get(basePath + path).handler(action);
     }
 }
