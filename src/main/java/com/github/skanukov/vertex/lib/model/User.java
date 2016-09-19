@@ -7,15 +7,31 @@ import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * User model.
  */
-public class User extends JsonObject {
+public class User {
+    private Long id;
+    private String email;
+    private String passwordDigest;
+    private String rememberToken;
+    private Role role;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
     public User(JsonObject jsonUser) {
-        super(jsonUser.getMap());
+        id = jsonUser.getLong("id");
+        email = jsonUser.getString("email");
+        passwordDigest = jsonUser.getString("password_digest");
+        rememberToken = jsonUser.getString("remember_token");
+        role = Role.valueOf(jsonUser.getString("role"));
+        createdAt = LocalDateTime.ofInstant(jsonUser.getInstant("created_at"), ZoneId.systemDefault());
+        updatedAt = LocalDateTime.ofInstant(jsonUser.getInstant("updated_at"), ZoneId.systemDefault());
     }
 
     public static Future<List<User>> getAll() {
@@ -50,5 +66,33 @@ public class User extends JsonObject {
             });
         });
         return result;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPasswordDigest() {
+        return passwordDigest;
+    }
+
+    public String getRememberToken() {
+        return rememberToken;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }
