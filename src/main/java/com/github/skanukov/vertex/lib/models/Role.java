@@ -1,4 +1,4 @@
-package com.github.skanukov.vertex.lib.model;
+package com.github.skanukov.vertex.lib.models;
 
 /**
  * Role enum.
