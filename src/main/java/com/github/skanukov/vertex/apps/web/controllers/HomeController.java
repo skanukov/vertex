@@ -6,7 +6,7 @@ import io.vertx.ext.web.RoutingContext;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeController extends VertexController {
+public final class HomeController extends VertexController {
     public void actionIndex(RoutingContext context) {
         context.put("name", "User");
         renderTemplate(context, "./templates/web/home/index.ftl");

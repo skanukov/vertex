@@ -11,10 +11,11 @@ import io.vertx.ext.sql.SQLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public final class UserRepository {
-    public Future<Optional<List<User>>> all() {
-        Future<Optional<List<User>>> result = Future.future();
+    public Future<List<User>> all() {
+        Future<List<User>> result = Future.future();
 
         AsyncSQLClient sqlClient = AsyncSQLClientFactory.getAsyncSQLClient();
         sqlClient.getConnection(getConnection -> {
@@ -33,15 +34,12 @@ public final class UserRepository {
                     return;
                 }
 
-                List<User> users = null;
+                List<User> users = new ArrayList<>();
                 ResultSet rs = query.result();
                 if (rs.getNumRows() > 0) {
-                    users = new ArrayList<>();
-                    for (JsonObject jsonUser : rs.getRows()) {
-                        users.add(new User(jsonUser));
-                    }
+                    users.addAll(rs.getRows().stream().map(User::new).collect(Collectors.toList()));
                 }
-                result.complete(Optional.ofNullable(users));
+                result.complete(users);
             });
         });
 

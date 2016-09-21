@@ -17,7 +17,7 @@ public final class UserController extends VertexController {
                 return;
             }
 
-            List<User> users = allUsers.result().orElse(new ArrayList<>());
+            List<User> users = allUsers.result();
             renderJson(context, users);
         });
     }

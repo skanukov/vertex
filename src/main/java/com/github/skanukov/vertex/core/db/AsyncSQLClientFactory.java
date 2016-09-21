@@ -1,6 +1,5 @@
 package com.github.skanukov.vertex.core.db;
 
-import com.github.skanukov.vertex.Application;
 import com.github.skanukov.vertex.core.config.SettingsFactory;
 import com.github.skanukov.vertex.core.vertx.VertxFactory;
 import io.vertx.core.json.JsonObject;
