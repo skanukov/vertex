@@ -5,7 +5,7 @@ import com.github.skanukov.vertex.lib.models.User;
 import com.github.skanukov.vertex.lib.repositories.UserRepository;
 import io.vertx.ext.web.RoutingContext;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class UserController extends VertexController {
@@ -17,7 +17,7 @@ public final class UserController extends VertexController {
                 return;
             }
 
-            List<User> users = allUsers.result();
+            List<User> users = allUsers.result().orElse(Collections.emptyList());
             renderJson(context, users);
         });
     }
