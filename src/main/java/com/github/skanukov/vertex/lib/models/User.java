@@ -18,7 +18,7 @@ public final class User extends Record {
     private LocalDateTime updatedAt;
 
     public User(JsonObject jsonUser) {
-        setId(jsonUser.getInteger("id"));
+        super(jsonUser);
         email = jsonUser.getString("email");
         passwordDigest = jsonUser.getString("password_digest");
         rememberToken = jsonUser.getString("remember_token");

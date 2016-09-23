@@ -47,9 +47,9 @@ public final class Query {
     public Future<Void> execute(SQLConnection connection) {
         Future<Void> result = Future.future();
 
-        executeQuery(connection).setHandler(queryRes -> {
-            if (queryRes.failed()) {
-                result.fail(queryRes.cause());
+        executeQuery(connection).setHandler(execQuery -> {
+            if (execQuery.failed()) {
+                result.fail(execQuery.cause());
             } else {
                 result.complete();
             }
@@ -61,17 +61,18 @@ public final class Query {
     public <T> Future<Optional<T>> executeScalar(SQLConnection connection, Class<T> clazz) {
         Future<Optional<T>> result = Future.future();
 
-        executeQuery(connection).setHandler(queryRes -> {
-            if (queryRes.failed()) {
-                result.fail(queryRes.cause());
+        executeQuery(connection).setHandler(execQuery -> {
+            if (execQuery.failed()) {
+                result.fail(execQuery.cause());
+                return;
+            }
+
+            ResultSet rs = execQuery.result();
+            if (rs.getNumRows() < 1) {
+                result.complete(Optional.empty());
             } else {
-                ResultSet rs = queryRes.result();
-                if (rs.getNumRows() < 1) {
-                    result.complete(Optional.empty());
-                } else {
-                    T value = clazz.cast(rs.getResults().get(0).getValue(0));
-                    result.complete(Optional.of(value));
-                }
+                T value = clazz.cast(rs.getResults().get(0).getValue(0));
+                result.complete(Optional.of(value));
             }
         });
 
@@ -81,21 +82,22 @@ public final class Query {
     public <T> Future<Optional<List<T>>> executeScalarList(SQLConnection connection, Class<T> clazz) {
         Future<Optional<List<T>>> result = Future.future();
 
-        executeQuery(connection).setHandler(queryRes -> {
-            if (queryRes.failed()) {
-                result.fail(queryRes.cause());
+        executeQuery(connection).setHandler(execQuery -> {
+            if (execQuery.failed()) {
+                result.fail(execQuery.cause());
+                return;
+            }
+
+            ResultSet rs = execQuery.result();
+            if (rs.getNumRows() < 1) {
+                result.complete(Optional.empty());
             } else {
-                ResultSet rs = queryRes.result();
-                if (rs.getNumRows() < 1) {
-                    result.complete(Optional.empty());
-                } else {
-                    List<T> resultList = new ArrayList<>();
-                    for (JsonArray row : rs.getResults()) {
-                        T value = clazz.cast(row.getValue(0));
-                        resultList.add(value);
-                    }
-                    result.complete(Optional.of(resultList));
+                List<T> resultList = new ArrayList<>();
+                for (JsonArray row : rs.getResults()) {
+                    T value = clazz.cast(row.getValue(0));
+                    resultList.add(value);
                 }
+                result.complete(Optional.of(resultList));
             }
         });
 
@@ -105,21 +107,22 @@ public final class Query {
     public <T extends Record> Future<Optional<T>> executeAndFetchFirst(SQLConnection connection, Class<T> clazz) {
         Future<Optional<T>> result = Future.future();
 
-        executeQuery(connection).setHandler(queryRes -> {
-            if (queryRes.failed()) {
-                result.fail(queryRes.cause());
+        executeQuery(connection).setHandler(execQuery -> {
+            if (execQuery.failed()) {
+                result.fail(execQuery.cause());
+                return;
+            }
+
+            ResultSet rs = execQuery.result();
+            if (rs.getNumRows() < 1) {
+                result.complete(Optional.empty());
             } else {
-                ResultSet rs = queryRes.result();
-                if (rs.getNumRows() < 1) {
-                    result.complete(Optional.empty());
-                } else {
-                    try {
-                        JsonObject jsonRecord = rs.getRows().get(0);
-                        T record = clazz.getConstructor(JsonObject.class).newInstance(jsonRecord);
-                        result.complete(Optional.of(record));
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                        result.fail(e);
-                    }
+                try {
+                    JsonObject jsonRecord = rs.getRows().get(0);
+                    T record = clazz.getConstructor(JsonObject.class).newInstance(jsonRecord);
+                    result.complete(Optional.of(record));
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    result.fail(e);
                 }
             }
         });
@@ -130,24 +133,25 @@ public final class Query {
     public <T extends Record> Future<Optional<List<T>>> executeAndFetch(SQLConnection connection, Class<T> clazz) {
         Future<Optional<List<T>>> result = Future.future();
 
-        executeQuery(connection).setHandler(queryRes -> {
-            if (queryRes.failed()) {
-                result.fail(queryRes.cause());
+        executeQuery(connection).setHandler(execQuery -> {
+            if (execQuery.failed()) {
+                result.fail(execQuery.cause());
+                return;
+            }
+
+            ResultSet rs = execQuery.result();
+            if (rs.getNumRows() < 1) {
+                result.complete(Optional.empty());
             } else {
-                ResultSet rs = queryRes.result();
-                if (rs.getNumRows() < 1) {
-                    result.complete(Optional.empty());
-                } else {
-                    try {
-                        List<T> resultList = new ArrayList<>();
-                        for (JsonObject jsonRecord : rs.getRows()) {
-                            T record = clazz.getConstructor(JsonObject.class).newInstance(jsonRecord);
-                            resultList.add(record);
-                        }
-                        result.complete(Optional.of(resultList));
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                        result.fail(e);
+                try {
+                    List<T> resultList = new ArrayList<>();
+                    for (JsonObject jsonRecord : rs.getRows()) {
+                        T record = clazz.getConstructor(JsonObject.class).newInstance(jsonRecord);
+                        resultList.add(record);
                     }
+                    result.complete(Optional.of(resultList));
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    result.fail(e);
                 }
             }
         });
