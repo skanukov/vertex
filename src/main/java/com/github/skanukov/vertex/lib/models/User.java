@@ -1,5 +1,6 @@
 package com.github.skanukov.vertex.lib.models;
 
+import com.github.skanukov.vertex.core.db.Record;
 import io.vertx.core.json.JsonObject;
 
 import java.time.LocalDateTime;
@@ -8,8 +9,7 @@ import java.time.ZoneId;
 /**
  * User model.
  */
-public final class User {
-    private Long id;
+public final class User extends Record {
     private String email;
     private String passwordDigest;
     private String rememberToken;
@@ -18,17 +18,13 @@ public final class User {
     private LocalDateTime updatedAt;
 
     public User(JsonObject jsonUser) {
-        id = jsonUser.getLong("id");
+        super(jsonUser);
         email = jsonUser.getString("email");
         passwordDigest = jsonUser.getString("password_digest");
         rememberToken = jsonUser.getString("remember_token");
         role = Role.valueOf(jsonUser.getString("role"));
         createdAt = LocalDateTime.ofInstant(jsonUser.getInstant("created_at"), ZoneId.systemDefault());
         updatedAt = LocalDateTime.ofInstant(jsonUser.getInstant("updated_at"), ZoneId.systemDefault());
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getEmail() {

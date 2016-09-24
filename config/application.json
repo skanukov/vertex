@@ -6,6 +6,7 @@
     "port": 5432,
     "database": "demo_dev",
     "username": "demo_dev",
-    "password": "123"
+    "password": "123",
+    "maxPoolSize": 15
   }
 }
