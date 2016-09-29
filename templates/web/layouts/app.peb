@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="">
+<head>
+  {% include "../shared/_head.peb" %}
+  {% block head %}{% endblock %}
+</head>
+<body>
+{% block content %}{% endblock %}
+
+{% include "../shared/_scripts.peb" %}
+{% block scripts %}{% endblock %}
+</body>
+</html>
+

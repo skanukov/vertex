@@ -9,7 +9,7 @@ import java.util.List;
 public final class HomeController extends VertexController {
     public void actionIndex(RoutingContext context) {
         context.put("name", "User");
-        renderTemplate(context, "./templates/web/home/index.ftl");
+        renderTemplate(context, "./templates/web/home/index.peb");
     }
 
     public void actionJson(RoutingContext context) {

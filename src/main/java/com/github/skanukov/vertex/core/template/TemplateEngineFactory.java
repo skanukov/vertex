@@ -1,7 +1,8 @@
 package com.github.skanukov.vertex.core.template;
 
 import com.github.skanukov.vertex.core.config.SettingsFactory;
-import io.vertx.ext.web.templ.FreeMarkerTemplateEngine;
+import com.github.skanukov.vertex.core.vertx.VertxFactory;
+import io.vertx.ext.web.templ.PebbleTemplateEngine;
 import io.vertx.ext.web.templ.TemplateEngine;
 
 /**
@@ -22,14 +23,15 @@ public final class TemplateEngineFactory {
      * @return The application template engine.
      */
     public static TemplateEngine getTemplateEngine() {
+        // If app is running in debug mode create a new template engine instance every time.
+        // This will prevent templates from being cached.
+        if (SettingsFactory.getSettings().getBoolean("isDebug", false)) {
+            return createTemplateEngine();
+        }
         return TemplateEngineHolder.INSTANCE;
     }
 
     private static TemplateEngine createTemplateEngine() {
-        FreeMarkerTemplateEngine templateEngine = FreeMarkerTemplateEngine.create();
-        if (SettingsFactory.getSettings().getBoolean("is_debug", false)) {
-            templateEngine.setMaxCacheSize(0);
-        }
-        return templateEngine;
+        return PebbleTemplateEngine.create(VertxFactory.getVertx());
     }
 }

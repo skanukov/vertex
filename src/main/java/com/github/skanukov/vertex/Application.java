@@ -19,7 +19,7 @@ public enum Application {
      * Entry point for the Vertex application.
      */
     public void init() {
-        if (SettingsFactory.getSettings().getBoolean("is_debug", false)) {
+        if (SettingsFactory.getSettings().getBoolean("isDebug", false)) {
             logger.info("Debug mode enabled");
         }
 

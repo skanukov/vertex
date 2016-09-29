@@ -1,0 +1,8 @@
+{% extends "../layouts/app.peb" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+  <h1>Hello, {{ context.get("name") }}</h1>
+  <h2>Request path is {{context.request().path()}}</h2>
+{% endblock %}
